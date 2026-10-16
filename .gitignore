@@ -1,0 +1,12 @@
+# Node (E2E harness dependencies)
+tools/e2e/node_modules/
+
+# Generated E2E artifacts
+tools/e2e/shot-*.png
+
+# Claude Code local settings
+.claude/settings.local.json
+
+# OS cruft
+Thumbs.db
+Desktop.ini

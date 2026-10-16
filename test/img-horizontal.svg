@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="640" height="420" viewBox="0 0 640 420">
+  <rect width="640" height="420" fill="#f2f2f0"/>
+  <rect x="20" y="20" width="600" height="380" fill="#ffffff" stroke="#222" stroke-width="3"/>
+  <!-- speed lines -->
+  <g stroke="#cfcfcf" stroke-width="2">
+    <line x1="40" y1="60" x2="200" y2="90"/>
+    <line x1="40" y1="110" x2="180" y2="120"/>
+    <line x1="460" y1="330" x2="600" y2="300"/>
+    <line x1="470" y1="360" x2="610" y2="355"/>
+  </g>
+  <!-- speech bubble, horizontal Japanese text -->
+  <ellipse cx="200" cy="120" rx="140" ry="70" fill="#ffffff" stroke="#111" stroke-width="3"/>
+  <path d="M 150 185 L 120 225 L 190 188 Z" fill="#ffffff" stroke="#111" stroke-width="3"/>
+  <text x="200" y="112" font-family="'Yu Gothic','Meiryo',sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#111">今日はいい</text>
+  <text x="200" y="146" font-family="'Yu Gothic','Meiryo',sans-serif" font-size="26" font-weight="bold" text-anchor="middle" fill="#111">天気ですね</text>
+  <!-- narration box, English -->
+  <rect x="380" y="240" width="220" height="110" fill="#ffffff" stroke="#111" stroke-width="3"/>
+  <text x="392" y="270" font-family="Georgia, serif" font-size="17" fill="#111">It was a quiet</text>
+  <text x="392" y="295" font-family="Georgia, serif" font-size="17" fill="#111">afternoon in the</text>
+  <text x="392" y="320" font-family="Georgia, serif" font-size="17" fill="#111">old shopping</text>
+  <text x="392" y="345" font-family="Georgia, serif" font-size="17" fill="#111">district...</text>
+</svg>

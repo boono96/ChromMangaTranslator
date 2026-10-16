@@ -1,0 +1,253 @@
+:root {
+  color-scheme: dark;
+  --bg: #16181d;
+  --panel: #1e2128;
+  --border: #2c3038;
+  --text: #e8eaf0;
+  --muted: #9aa0ab;
+  --accent: #4f46e5;
+  --accent-hover: #6159f0;
+  --ok: #34d399;
+  --warn: #fbbf24;
+  --err: #f87171;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  width: 340px;
+  margin: 0;
+  padding: 14px;
+  background: var(--bg);
+  color: var(--text);
+  font: 13px/1.45 "Segoe UI", system-ui, sans-serif;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.logo {
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+}
+
+h1 {
+  font-size: 15px;
+  margin: 0;
+}
+
+.subtitle {
+  margin: 1px 0 0;
+  color: var(--muted);
+  font-size: 11.5px;
+  max-width: 240px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.gear {
+  margin-left: auto;
+  background: none;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 6px;
+  border-radius: 6px;
+}
+
+.gear:hover {
+  background: var(--panel);
+  color: var(--text);
+}
+
+.section {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px 12px;
+  margin-bottom: 12px;
+}
+
+.label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+  margin: 8px 0 4px;
+}
+
+.section .label:first-child {
+  margin-top: 0;
+}
+
+.select {
+  width: 100%;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+.chip {
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--muted);
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.chip.on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+.primary {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 9px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.primary:hover:enabled {
+  background: var(--accent-hover);
+}
+
+.primary:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.primary.restore {
+  background: #7f1d1d;
+}
+
+.secondary {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px;
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  background: var(--panel);
+  color: var(--text);
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.secondary:hover {
+  border-color: var(--accent);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.progress {
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+}
+
+.progressRow {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 6px;
+}
+
+.bar {
+  height: 6px;
+  border-radius: 3px;
+  background: var(--bg);
+  overflow: hidden;
+}
+
+.barFill {
+  height: 100%;
+  width: 0%;
+  background: var(--accent);
+  transition: width 0.25s ease;
+}
+
+.imageList {
+  list-style: none;
+  margin: 8px 0 0;
+  padding: 0;
+  max-height: 150px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.imageList li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex: none;
+  background: var(--muted);
+}
+
+.dot.done { background: var(--ok); }
+.dot.error { background: var(--err); }
+.dot.busy { background: var(--warn); animation: pulse 1.2s infinite; }
+
+@keyframes pulse {
+  50% { opacity: 0.4; }
+}
+
+.imgLabel {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.errorText {
+  color: var(--err);
+  font-size: 11px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.footer {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}

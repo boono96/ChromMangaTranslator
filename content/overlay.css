@@ -1,0 +1,17 @@
+.mtr-overlay-canvas {
+  position: fixed !important;
+  pointer-events: none !important;
+  z-index: 2147483646 !important;
+  margin: 0 !important;
+  border: 0 !important;
+  padding: 0 !important;
+  border-radius: 0 !important;
+  transform: none !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  filter: none !important;
+  clip-path: none !important;
+  box-shadow: none !important;
+  background: transparent !important;
+  display: none;
+}

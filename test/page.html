@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Manga Translator — test page</title>
+  <style>
+    body { background: #101216; color: #e8eaf0; font: 15px/1.6 "Segoe UI", system-ui, sans-serif; margin: 0; padding: 32px; }
+    h1 { font-size: 20px; margin: 0 0 6px; }
+    p.note { color: #9aa0ab; margin: 0 0 24px; max-width: 720px; }
+    .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(420px, 1fr)); gap: 24px; max-width: 1400px; }
+    figure { margin: 0; background: #1e2128; border: 1px solid #2c3038; border-radius: 12px; padding: 12px; }
+    img { width: 100%; height: auto; display: block; border-radius: 6px; }
+    figcaption { color: #9aa0ab; font-size: 13px; margin-top: 8px; }
+    code { background: #101216; padding: 1px 6px; border-radius: 4px; font-size: 13px; }
+  </style>
+</head>
+<body>
+  <h1>Manga Translator — test page</h1>
+  <p class="note">
+    Serve this folder over HTTP (e.g. <code>python -m http.server 8000</code> from the
+    extension root, then open <code>http://localhost:8000/test/page.html</code>), click the
+    extension icon, and press <strong>Translate page</strong>. The bubbles contain Japanese
+    (horizontal + vertical) and English text; translations are drawn back onto the images.
+  </p>
+  <div class="grid">
+    <figure>
+      <img src="img-horizontal.svg" alt="Horizontal Japanese bubble and English narration box" />
+      <figcaption>Horizontal Japanese speech bubble + English narration box</figcaption>
+    </figure>
+    <figure>
+      <img src="img-vertical.svg" alt="Vertical Japanese bubble and caption" />
+      <figcaption>Vertical Japanese bubble (jpn_vert) + horizontal caption</figcaption>
+    </figure>
+  </div>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <header class="header">
+    <img src="../icons/icon48.png" alt="" class="logo" />
+    <div>
+      <h1>Manga Translator</h1>
+      <p id="pageState" class="subtitle">Checking page…</p>
+    </div>
+    <button id="openOptions" class="gear" title="Settings" aria-label="Settings">
+      <svg viewBox="0 0 24 24" width="18" height="18"><path fill="currentColor" d="M19.14 12.94a7.07 7.07 0 0 0 .05-.94 7.07 7.07 0 0 0-.05-.94l2.03-1.58a.5.5 0 0 0 .12-.64l-1.92-3.32a.5.5 0 0 0-.61-.22l-2.39.96a7.3 7.3 0 0 0-1.62-.94l-.36-2.54A.5.5 0 0 0 13.9 2h-3.8a.5.5 0 0 0-.49.42l-.36 2.54c-.59.24-1.13.56-1.62.94l-2.39-.96a.5.5 0 0 0-.61.22L2.71 8.48a.5.5 0 0 0 .12.64l2.03 1.58c-.04.31-.06.62-.06.94 0 .32.02.63.06.94L2.83 14.16a.5.5 0 0 0-.12.64l1.92 3.32c.14.24.42.34.61.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.25.42.49.42h3.8c.24 0 .44-.18.49-.42l.36-2.54a7.3 7.3 0 0 0 1.62-.94l2.39.96c.23.09.47 0 .61-.22l1.92-3.32a.5.5 0 0 0-.12-.64l-2.03-1.58ZM12 15.6A3.6 3.6 0 1 1 12 8.4a3.6 3.6 0 0 1 0 7.2Z"/></svg>
+    </button>
+  </header>
+
+  <section class="section">
+    <label class="label">Translate into</label>
+    <select id="targetLang" class="select"></select>
+
+    <label class="label">Detect text in</label>
+    <div id="ocrChips" class="chips"></div>
+
+    <label class="label">Text direction</label>
+    <select id="direction" class="select">
+      <option value="auto">Auto (vertical retry)</option>
+      <option value="horizontal">Horizontal</option>
+      <option value="vertical">Vertical (Japanese columns)</option>
+    </select>
+  </section>
+
+  <button id="actionBtn" class="primary" disabled>Translate page</button>
+  <button id="originalBtn" class="secondary hidden">Show original</button>
+
+  <section id="progress" class="progress hidden">
+    <div class="progressRow">
+      <span id="progressText">0 / 0 images</span>
+      <span id="regionCount"></span>
+    </div>
+    <div class="bar"><div id="barFill" class="barFill"></div></div>
+    <ul id="imageList" class="imageList"></ul>
+  </section>
+
+  <footer class="footer">
+    <span class="hint">Right-click an image for single-image translation.</span>
+  </footer>
+
+  <script src="../shared/langs.js"></script>
+  <script src="../shared/settings.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Manga Translator — Options</title>
+  <link rel="stylesheet" href="options.css" />
+</head>
+<body>
+  <main class="wrap">
+    <header>
+      <img src="../icons/icon48.png" alt="" width="40" height="40" />
+      <h1>Manga Translator — Options</h1>
+    </header>
+
+    <section>
+      <h2>Translation</h2>
+
+      <label class="row">
+        <span class="key">Provider</span>
+        <select id="provider">
+          <option value="google">Google (free, no key)</option>
+          <option value="deepl">DeepL (API key)</option>
+          <option value="libre">LibreTranslate (self-host or libretranslate.com)</option>
+          <option value="custom">Custom GET endpoint</option>
+        </select>
+      </label>
+
+      <label class="row provider-field" data-provider="deepl">
+        <span class="key">DeepL API key</span>
+        <input type="password" id="deeplKey" placeholder="xxxxxxxx-xxxx-...-:fx for free tier" />
+      </label>
+
+      <label class="row provider-field" data-provider="libre">
+        <span class="key">LibreTranslate URL</span>
+        <input type="text" id="libreUrl" placeholder="https://libretranslate.com/translate" />
+      </label>
+
+      <label class="row provider-field" data-provider="libre">
+        <span class="key">LibreTranslate API key (optional)</span>
+        <input type="password" id="libreKey" />
+      </label>
+
+      <label class="row provider-field" data-provider="custom">
+        <span class="key">Endpoint URL template</span>
+        <input type="text" id="customUrl" placeholder="https://api.example.com/t?text={q}&amp;from={sl}&amp;to={tl}" />
+        <span class="help">Placeholders: <code>{q}</code> text, <code>{sl}</code> source, <code>{tl}</code> target. The endpoint must return JSON.</span>
+      </label>
+
+      <label class="row provider-field" data-provider="custom">
+        <span class="key">Response JSON path</span>
+        <input type="text" id="customPath" placeholder="0.0 or data.translations.0.translatedText" />
+        <span class="help">Dot-separated path into the JSON response. Use numbers for array indexes.</span>
+      </label>
+    </section>
+
+    <section>
+      <h2>OCR</h2>
+
+      <label class="row">
+        <span class="key">Minimum confidence</span>
+        <input type="range" id="minConfidence" min="0" max="95" step="5" />
+        <span id="minConfidenceVal" class="value"></span>
+      </label>
+      <p class="help inline">Higher = fewer false detections, but may drop stylized text.</p>
+
+      <label class="row">
+        <span class="key">Minimum image width (px)</span>
+        <input type="number" id="minImageWidth" min="32" max="4000" step="10" />
+      </label>
+
+      <label class="row">
+        <span class="key">Language data source</span>
+        <select id="langData">
+          <option value="cdn">Download on demand from CDN (cached)</option>
+          <option value="local">Local folder (lib/tessdata)</option>
+        </select>
+      </label>
+      <p class="help inline">For offline use: place <code>&lt;lang&gt;.traineddata.gz</code> files (e.g. <code>jpn_vert.traineddata.gz</code>) in <code>lib/tessdata/</code> from <a href="https://github.com/tesseract-ocr/tessdata_fast" target="_blank" rel="noreferrer">tessdata_fast</a>.</p>
+    </section>
+
+    <section>
+      <h2>Rendering</h2>
+
+      <label class="row">
+        <span class="key">Text color</span>
+        <select id="textColor">
+          <option value="auto">Auto (contrast with background)</option>
+          <option value="black">Always black</option>
+ <option value="white">Always white</option>
+        </select>
+      </label>
+
+      <label class="row">
+        <span class="key">Font family</span>
+        <input type="text" id="fontFamily" placeholder="auto" />
+        <span class="help">Any CSS font stack, or leave as <code>auto</code> to pick per target language.</span>
+      </label>
+    </section>
+
+    <section>
+      <h2>Behavior</h2>
+
+      <label class="row checkbox">
+        <input type="checkbox" id="autoNewImages" />
+        <span>Automatically translate images added while scrolling (lazy-loaded pages)</span>
+      </label>
+
+      <label class="row checkbox">
+        <input type="checkbox" id="debug" />
+        <span>Debug logging to the browser console</span>
+      </label>
+    </section>
+
+    <div class="actions">
+      <button id="save" class="primary">Save</button>
+      <button id="reset" class="secondary">Reset to defaults</button>
+      <span id="savedNote" class="saved hidden">Saved ✓</span>
+    </div>
+  </main>
+
+  <script src="../shared/langs.js"></script>
+  <script src="../shared/settings.js"></script>
+  <script src="options.js"></script>
+</body>
+</html>
