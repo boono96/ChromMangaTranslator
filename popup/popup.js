@@ -222,6 +222,13 @@
           err.textContent = img.error;
           err.title = img.error;
           li.appendChild(err);
+        } else if (img.warning) {
+          const warn = document.createElement('span');
+          warn.className = 'errorText';
+          warn.textContent = img.warning;
+          warn.title = img.warning;
+          warn.style.color = 'var(--warn)';
+          li.appendChild(warn);
         } else if (img.regions) {
           const n = document.createElement('span');
           n.textContent = `${img.regions}`;

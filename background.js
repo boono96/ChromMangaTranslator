@@ -237,6 +237,8 @@ async function handleTranslate(msg) {
 
   const CONCURRENCY = 4;
   let cursor = 0;
+  let failures = 0;
+  let lastFailError = null;
   async function worker() {
     while (cursor < todo.length) {
       const idx = todo[cursor++];
@@ -252,12 +254,17 @@ async function handleTranslate(msg) {
         }
       }
       if (out == null) {
-        // Degrade gracefully: keep the original text for this block.
+        // Degrade gracefully: keep the original text for this block, but
+        // count the failure so the UI can surface it.
         console.warn('[MTR] translation failed for one block:', lastErr);
+        failures++;
+        lastFailError = lastErr;
         out = text;
       }
       results[idx] = out;
-      translationCache.set(cacheKeyFor(provider, from, to, text), out);
+      if (out !== text) {
+        translationCache.set(cacheKeyFor(provider, from, to, text), out);
+      }
     }
   }
 
@@ -265,7 +272,19 @@ async function handleTranslate(msg) {
   for (let i = 0; i < Math.min(CONCURRENCY, todo.length); i++) workers.push(worker());
   await Promise.all(workers);
 
-  return { ok: true, translations: results };
+  // Every uncached block failed — the provider is broken (bad key, wrong
+  // URL, blocked network). Report it instead of silently redrawing the
+  // original text.
+  if (todo.length > 0 && failures === todo.length) {
+    return { ok: false, error: String((lastFailError && lastFailError.message) || lastFailError || 'translation failed') };
+  }
+  return {
+    ok: true,
+    translations: results,
+    failed: failures,
+    total: texts.length,
+    lastError: lastFailError ? String(lastFailError.message || lastFailError) : undefined,
+  };
 }
 
 function cacheKeyFor(provider, from, to, text) {
@@ -331,6 +350,12 @@ function mapDeeplTarget(to) {
   return t;
 }
 
+// LibreTranslate language codes differ from Google's for Chinese.
+const LIBRE_TARGET_MAP = {
+  'zh-CN': 'zh',
+  'zh-TW': 'zt',
+};
+
 async function translateLibre(text, from, to) {
   const settings = await getSettings();
   const endpoint = (settings.libreUrl || '').trim();
@@ -338,7 +363,7 @@ async function translateLibre(text, from, to) {
   const body = {
     q: text,
     source: from && GOOGLE_SL_MAP[from] ? GOOGLE_SL_MAP[from] : 'auto',
-    target: to,
+    target: LIBRE_TARGET_MAP[to] || to,
     format: 'text',
   };
   if (settings.libreKey) body.api_key = settings.libreKey;
@@ -348,7 +373,16 @@ async function translateLibre(text, from, to) {
     body: JSON.stringify(body),
     signal: AbortSignal.timeout(20000),
   });
-  if (!res.ok) throw new Error(`LibreTranslate HTTP ${res.status}`);
+  if (!res.ok) {
+    let detail = '';
+    try {
+      const errData = await res.json();
+      detail = errData.error || JSON.stringify(errData);
+    } catch (e) {
+      detail = '';
+    }
+    throw new Error(`LibreTranslate HTTP ${res.status}${detail ? `: ${detail}` : ''}`);
+  }
   const data = await res.json();
   if (typeof data.translatedText !== 'string') throw new Error('LibreTranslate: unexpected response');
   return data.translatedText;

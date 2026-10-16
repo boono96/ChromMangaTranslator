@@ -358,6 +358,10 @@
       renderJob(job);
       job.status = 'done';
       job.phaseText = `${job.regions.length} region(s)`;
+      if (tr.failed && tr.failed > 0) {
+        job.warning = `${tr.failed}/${blocks.length} block(s) failed to translate — original text kept (${tr.lastError || 'provider error'})`;
+        job.phaseText += ` · ${tr.failed} translation(s) failed`;
+      }
       broadcastStatus();
       sendBadge();
     } catch (e) {
@@ -611,6 +615,7 @@
         status: j.status,
         phaseText: j.phaseText || '',
         error: j.error,
+        warning: j.warning,
         regions: j.regions.length,
       })),
     };

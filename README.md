@@ -73,6 +73,13 @@ Language models (~10–25 MB each) are downloaded on first use from
 - **Translation** — provider, DeepL key, LibreTranslate URL/key, or a custom
   endpoint template (`{q}`, `{sl}`, `{tl}`) plus a JSON response path
   (e.g. `data.translations.0.translatedText`).
+
+  Note: the public `libretranslate.com` instance **requires an API key**
+  (get one at portal.libretranslate.com). Without a key every request
+  fails — the popup now shows the provider's error instead of silently
+  keeping the original text. For unlimited use, self-host
+  [LibreTranslate](https://github.com/LibreTranslate/LibreTranslate) and
+  point the URL at it (e.g. `http://localhost:5000/translate`).
 - **OCR** — confidence threshold, minimum image width, language data source.
 - **Rendering** — text color mode, custom font stack.
 - **Behavior** — auto-translate newly loaded (lazy) images, debug logging.
@@ -102,6 +109,9 @@ use, download `.traineddata.gz` files from
   node run.mjs --langs jpn --target en --timeout 150 --shot shot.png
   # flags: --lab true runs a PSM comparison probe inside the OCR context;
   #        --cycle false skips the restore/re-translate phase;
+  #        --provider libre --libreUrl … --libreKey … pins a translation
+  #        provider (tools/e2e/mock_lt.py is a mock LibreTranslate on
+  #        127.0.0.1:8124 — key "testkey" — for offline provider testing);
   #        --chrome <path> picks the browser (default: Edge)
   ```
   Note: Chrome ≥ 137 ignores `--load-extension` in branded builds, so the

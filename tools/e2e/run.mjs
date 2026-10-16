@@ -31,6 +31,10 @@ const PRESET = {
   minImageWidth: 220,
   debug: true,
 };
+if (arg('provider')) PRESET.provider = arg('provider');
+if (arg('libreUrl')) PRESET.libreUrl = arg('libreUrl');
+if (arg('libreKey')) PRESET.libreKey = arg('libreKey');
+if (arg('deeplKey')) PRESET.deeplKey = arg('deeplKey');
 
 // Copy extension to a temp dir with a pinned key => deterministic extension ID.
 function prepareExtension() {
